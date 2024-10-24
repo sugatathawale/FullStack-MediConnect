@@ -1,23 +1,19 @@
 {
-    "projects": [
-      {
-        "name": "frontend",
-        "path": "frontend",
-        "buildCommand": "npm run build",
-        "outputDirectory": "build"
-      },
-      {
-        "name": "backend",
-        "path": "backend",
-        "buildCommand": "npm install",
-        "outputDirectory": ""
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/backend/$1"
-      }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "build" }
+    },
+    {
+      "src": "backend/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/backend/$1"
+    }
+  ]
+}
